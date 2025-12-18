@@ -19,8 +19,9 @@ const App: React.FC = () => {
     setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
   }, []);
 
-  // Touch handlers for mobile swipe
+  // Touch handlers for mobile swipe (iOS 18 compatible)
   const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(0); // Reset
     setTouchStart(e.targetTouches[0].clientX);
   };
 
@@ -31,11 +32,21 @@ const App: React.FC = () => {
   const handleTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
     const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
+    const minSwipeDistance = 50;
     
-    if (isLeftSwipe) nextSlide();
-    if (isRightSwipe) prevSlide();
+    if (Math.abs(distance) > minSwipeDistance) {
+      if (distance > 0) {
+        // Swipe left - next slide
+        nextSlide();
+      } else {
+        // Swipe right - previous slide
+        prevSlide();
+      }
+    }
+    
+    // Reset
+    setTouchStart(0);
+    setTouchEnd(0);
   };
 
   const exportToPDF = () => {
@@ -58,7 +69,20 @@ const App: React.FC = () => {
       if (e.key === 'ArrowLeft') prevSlide();
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    
+    // Prevent iOS bounce scroll
+    const preventBounce = (e: TouchEvent) => {
+      if (e.touches.length > 1) {
+        e.preventDefault();
+      }
+    };
+    
+    document.addEventListener('touchmove', preventBounce, { passive: false });
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('touchmove', preventBounce);
+    };
   }, [nextSlide, prevSlide]);
 
   if (isPrinting) {
@@ -79,10 +103,15 @@ const App: React.FC = () => {
 
   return (
     <div 
-      className="h-screen w-screen bg-slate-950 overflow-hidden relative flex flex-col font-sans select-none"
+      className="h-screen w-screen bg-slate-950 overflow-hidden relative flex flex-col font-sans select-none touch-pan-y"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      style={{
+        WebkitUserSelect: 'none',
+        WebkitTouchCallout: 'none',
+        touchAction: 'pan-y',
+      }}
     >
       {/* Toast Notification */}
       <AnimatePresence>

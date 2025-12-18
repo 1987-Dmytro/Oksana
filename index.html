@@ -3,21 +3,34 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>B.L.S. Trans Logistik - Захист у Дорозі</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
             overflow: hidden;
             background: #020617;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: pan-y;
+            overscroll-behavior: none;
         }
+        
         .font-header {
             font-family: 'Montserrat', sans-serif;
         }
+        
         @media print {
             body { overflow: visible !important; height: auto !important; background: white !important; color: black !important; }
             #root { height: auto !important; }
@@ -29,7 +42,7 @@
                 display: flex !important; 
                 align-items: center; 
                 justify-content: center;
-                background: #020617 !important; /* Keep dark background for PDF aesthetic */
+                background: #020617 !important;
                 -webkit-print-color-adjust: exact;
                 color-adjust: exact;
             }
