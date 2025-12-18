@@ -104,42 +104,42 @@ const App: React.FC = () => {
       <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-orange-500/5 blur-[100px] pointer-events-none" />
 
       {/* Header */}
-      <header className="fixed top-0 w-full z-50 p-4 md:p-6 lg:p-10 flex justify-between items-center pointer-events-none">
-        <div className="flex items-center gap-2 md:gap-3">
-          <div className="w-8 h-8 md:w-10 md:h-10 bg-orange-500 flex items-center justify-center rounded-lg shadow-lg shadow-orange-500/20 pointer-events-auto">
-            <LayoutPanelLeft className="text-white w-4 h-4 md:w-6 md:h-6" />
+      <header className="fixed top-0 w-full z-50 p-6 md:p-10 flex justify-between items-center pointer-events-none">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-orange-500 flex items-center justify-center rounded-lg shadow-lg shadow-orange-500/20 pointer-events-auto">
+            <LayoutPanelLeft className="text-white w-6 h-6" />
           </div>
           <div className="pointer-events-auto">
-            <h1 className="text-sm md:text-xl font-bold font-header tracking-tighter">B.L.S. TRANS.LOGISTIK</h1>
-            <p className="text-[8px] md:text-[10px] text-slate-400 uppercase tracking-widest font-semibold hidden sm:block">Logistics & Insurance</p>
+            <h1 className="text-base md:text-xl font-bold font-header tracking-tighter">B.L.S. TRANS.LOGISTIK</h1>
+            <p className="text-[8px] md:text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Logistics & Insurance</p>
           </div>
         </div>
         <div className="hidden md:flex gap-3 lg:gap-4 items-center pointer-events-auto">
           <button 
             onClick={copyLink} 
-            className="text-xs md:text-sm font-semibold flex items-center gap-2 px-3 md:px-4 py-2 md:py-2.5 rounded-full border border-white/10 hover:bg-white/10 transition-all bg-white/5 backdrop-blur-md"
+            className="text-sm font-semibold flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/10 hover:bg-white/10 transition-all bg-white/5 backdrop-blur-md"
             title="Копіювати посилання для клієнта"
           >
-            <LinkIcon className="w-3 h-3 md:w-4 md:h-4 text-orange-500" />
-            <span className="hidden lg:inline">Поділитися</span>
+            <LinkIcon className="w-4 h-4 text-orange-500" />
+            Поділитися
           </button>
           <button 
             onClick={exportToPDF} 
-            className="text-xs md:text-sm font-semibold flex items-center gap-2 px-3 md:px-4 py-2 md:py-2.5 rounded-full border border-white/10 hover:bg-white/10 transition-all bg-white/5 backdrop-blur-md"
+            className="text-sm font-semibold flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/10 hover:bg-white/10 transition-all bg-white/5 backdrop-blur-md"
             title="Завантажити у форматі PDF"
           >
-            <FileDown className="w-3 h-3 md:w-4 md:h-4 text-orange-500" />
-            <span className="hidden lg:inline">PDF</span>
+            <FileDown className="w-4 h-4 text-orange-500" />
+            PDF Експорт
           </button>
-          <button className="bg-white text-slate-900 px-4 md:px-6 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-bold flex items-center gap-2 hover:bg-orange-500 hover:text-white transition-all shadow-xl active:scale-95">
-            <PhoneCall className="w-3 h-3 md:w-4 md:h-4" />
-            <span className="hidden lg:inline">Консультація</span>
+          <button className="bg-white text-slate-900 px-6 py-2.5 rounded-full text-sm font-bold flex items-center gap-2 hover:bg-orange-500 hover:text-white transition-all shadow-xl active:scale-95">
+            <PhoneCall className="w-4 h-4" />
+            Консультація
           </button>
         </div>
       </header>
 
       {/* Slides Container */}
-      <main className="flex-grow flex items-center justify-center relative overflow-hidden pt-16 md:pt-0">
+      <main className="flex-grow flex items-center justify-center relative overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -147,7 +147,7 @@ const App: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
             transition={{ type: 'spring', damping: 20, stiffness: 100 }}
-            className="w-full h-full max-w-7xl px-4 md:px-6 lg:px-12 flex items-center"
+            className="w-full h-full max-w-7xl px-6 md:px-12 flex items-center"
           >
             {renderSlide(slide)}
           </motion.div>
@@ -155,36 +155,36 @@ const App: React.FC = () => {
       </main>
 
       {/* Navigation Controls */}
-      <nav className="fixed bottom-4 md:bottom-10 left-0 right-0 z-50 px-4 md:px-10 flex justify-between items-center">
-        <div className="flex gap-1.5 md:gap-2">
+      <nav className="fixed bottom-10 left-0 right-0 z-50 px-10 flex justify-between items-center">
+        <div className="flex gap-2">
           {SLIDES.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className={`h-1 md:h-1.5 transition-all rounded-full ${
-                currentSlide === idx ? 'w-8 md:w-12 bg-orange-500' : 'w-3 md:w-4 bg-slate-700 hover:bg-slate-600'
+              className={`h-1.5 transition-all rounded-full ${
+                currentSlide === idx ? 'w-12 bg-orange-500' : 'w-4 bg-slate-700 hover:bg-slate-600'
               }`}
             />
           ))}
         </div>
-        <div className="flex gap-2 md:gap-4">
+        <div className="flex gap-4">
           <button 
             onClick={prevSlide}
-            className="p-2 md:p-3 rounded-full border border-slate-700 bg-slate-900/50 hover:bg-slate-800 transition-all text-white backdrop-blur-sm shadow-lg active:scale-90"
+            className="p-3 rounded-full border border-slate-700 bg-slate-900/50 hover:bg-slate-800 transition-all text-white backdrop-blur-sm shadow-lg active:scale-90"
           >
-            <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
+            <ChevronLeft className="w-6 h-6" />
           </button>
           <button 
             onClick={nextSlide}
-            className="p-2 md:p-3 rounded-full bg-orange-500 hover:bg-orange-600 transition-all text-white shadow-xl shadow-orange-500/20 active:scale-90"
+            className="p-3 rounded-full bg-orange-500 hover:bg-orange-600 transition-all text-white shadow-xl shadow-orange-500/20 active:scale-90"
           >
-            <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
+            <ChevronRight className="w-6 h-6" />
           </button>
         </div>
       </nav>
 
       {/* Slide Counter */}
-      <div className="fixed bottom-4 md:bottom-10 left-1/2 -translate-x-1/2 text-slate-500 font-mono text-xs md:text-sm font-bold tracking-widest opacity-50">
+      <div className="fixed bottom-10 left-1/2 -translate-x-1/2 text-slate-500 font-mono text-sm font-bold tracking-widest opacity-50">
         {String(currentSlide + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
       </div>
     </div>
@@ -195,32 +195,32 @@ const renderSlide = (slide: any) => {
   switch (slide.type) {
     case 'hero':
       return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center w-full">
-          <div className="space-y-4 md:space-y-8">
-            <span className="px-3 md:px-4 py-1 bg-orange-500/10 text-orange-500 rounded-full text-[10px] md:text-xs font-bold tracking-widest uppercase border border-orange-500/20 inline-block">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center w-full">
+          <div className="space-y-6 md:space-y-8">
+            <span className="px-4 py-1 bg-orange-500/10 text-orange-500 rounded-full text-xs font-bold tracking-widest uppercase border border-orange-500/20 inline-block">
               Ваш надійний логістичний партнер
             </span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black font-header leading-[1.1]">
+            <h2 className="text-5xl md:text-6xl lg:text-8xl font-black font-header leading-[1.1]">
               Захист <br /> 
               <span className="text-orange-500">у Дорозі</span>
             </h2>
-            <p className="text-base md:text-xl text-slate-400 max-w-lg leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-400 max-w-lg leading-relaxed">
               {slide.subtitle}
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-              <button className="bg-orange-500 px-6 md:px-8 py-3 md:py-4 rounded-xl font-bold text-base md:text-lg hover:shadow-2xl hover:shadow-orange-500/30 transition-all active:scale-95 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button className="bg-orange-500 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-orange-500/30 transition-all active:scale-95">
                 Отримати аудит
               </button>
-              <button className="border border-slate-700 px-6 md:px-8 py-3 md:py-4 rounded-xl font-bold text-base md:text-lg hover:bg-white hover:text-slate-900 transition-all active:scale-95 w-full sm:w-auto">
+              <button className="border border-slate-700 px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-slate-900 transition-all active:scale-95">
                 Наші рішення
               </button>
             </div>
           </div>
-          <div className="relative hidden md:block">
+          <div className="relative mt-8 md:mt-0">
             <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/20 to-transparent rounded-[40px] rotate-3 -z-10 blur-2xl" />
             <img 
               src={slide.image} 
-              className="w-full h-[300px] md:h-[500px] object-cover rounded-[40px] shadow-2xl border border-white/5" 
+              className="w-full h-[350px] md:h-[500px] object-cover rounded-[40px] shadow-2xl border border-white/5" 
               alt="Truck"
             />
           </div>
@@ -228,24 +228,24 @@ const renderSlide = (slide: any) => {
       );
     case 'split':
       return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center w-full">
-          <div className="space-y-6 md:space-y-10">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-header leading-tight">{slide.title}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center w-full">
+          <div className="space-y-8 md:space-y-10">
+            <h2 className="text-4xl md:text-5xl font-black font-header leading-tight">{slide.title}</h2>
             <div className="space-y-6 md:space-y-8">
               {slide.content.map((item: any, i: number) => (
-                <div key={i} className="flex gap-4 md:gap-6 group">
-                  <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-slate-800 rounded-xl md:rounded-2xl flex items-center justify-center border border-slate-700 group-hover:border-orange-500/50 transition-colors">
-                    {React.cloneElement(item.icon, { className: 'w-6 h-6 md:w-8 md:h-8 text-orange-500' })}
+                <div key={i} className="flex gap-6 group">
+                  <div className="flex-shrink-0 w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center border border-slate-700 group-hover:border-orange-500/50 transition-colors">
+                    {item.icon}
                   </div>
                   <div>
-                    <h4 className="text-lg md:text-xl font-bold mb-1 md:mb-2 group-hover:text-orange-500 transition-colors">{item.title}</h4>
-                    <p className="text-sm md:text-base text-slate-400 leading-relaxed">{item.desc}</p>
+                    <h4 className="text-xl font-bold mb-2 group-hover:text-orange-500 transition-colors">{item.title}</h4>
+                    <p className="text-slate-400 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="relative group hidden md:block">
+          <div className="relative group mt-8 md:mt-0">
             <div className="absolute -inset-4 bg-orange-500/10 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
             <img src={slide.image} className="rounded-3xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700 w-full aspect-[4/3] object-cover border border-white/10" alt="Context" />
           </div>
@@ -253,19 +253,19 @@ const renderSlide = (slide: any) => {
       );
     case 'grid':
       return (
-        <div className="w-full space-y-6 md:space-y-12">
+        <div className="w-full space-y-12">
           <div className="max-w-3xl">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-header mb-2 md:mb-4">{slide.title}</h2>
-            <p className="text-slate-400 text-sm md:text-base lg:text-lg">Комплексний підхід до кожного вантажу та маршруту.</p>
+            <h2 className="text-4xl md:text-5xl font-black font-header mb-4">{slide.title}</h2>
+            <p className="text-slate-400 text-base md:text-lg">Комплексний підхід до кожного вантажу та маршруту.</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {slide.content.map((item: any, i: number) => (
-              <div key={i} className="bg-slate-900/50 border border-slate-800 p-6 md:p-8 rounded-[24px] md:rounded-[32px] hover:bg-slate-800/50 hover:border-orange-500/30 transition-all group backdrop-blur-xl hover:-translate-y-2 duration-300">
-                <div className="w-12 h-12 md:w-14 md:h-14 bg-orange-500/10 text-orange-500 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-orange-500 group-hover:text-white transition-all">
-                   {React.cloneElement(item.icon, { className: 'w-6 h-6 md:w-7 md:h-7' })}
+              <div key={i} className="bg-slate-900/50 border border-slate-800 p-8 rounded-[32px] hover:bg-slate-800/50 hover:border-orange-500/30 transition-all group backdrop-blur-xl hover:-translate-y-2 duration-300">
+                <div className="w-14 h-14 bg-orange-500/10 text-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-orange-500 group-hover:text-white transition-all">
+                   {React.cloneElement(item.icon, { className: 'w-7 h-7' })}
                 </div>
-                <h4 className="text-lg md:text-xl font-bold mb-2 md:mb-3">{item.title}</h4>
-                <p className="text-xs md:text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+                <h4 className="text-xl font-bold mb-3">{item.title}</h4>
+                <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -337,21 +337,21 @@ const renderSlide = (slide: any) => {
       );
     case 'steps':
       return (
-        <div className="w-full space-y-8 md:space-y-16">
+        <div className="w-full space-y-16">
            <div className="text-center">
-              <h2 className="text-3xl md:text-4xl lg:text-6xl font-black font-header mb-2 md:mb-4">{slide.title}</h2>
-              <p className="text-sm md:text-base lg:text-xl text-slate-400">Ми цінуємо ваш час. Швидкість та прозорість — наші пріоритети.</p>
+              <h2 className="text-5xl md:text-6xl font-black font-header mb-4">{slide.title}</h2>
+              <p className="text-lg md:text-xl text-slate-400">Ми цінуємо ваш час. Швидкість та прозорість — наші пріоритети.</p>
            </div>
-           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6 relative">
+           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 relative">
               {slide.content.map((item: any, i: number) => (
-                <div key={i} className="bg-slate-900 border border-slate-800 p-6 md:p-8 rounded-[24px] md:rounded-[32px] space-y-3 md:space-y-4 relative group hover:border-orange-500/50 transition-all hover:bg-slate-800/80">
-                   <span className="text-4xl md:text-6xl font-black text-slate-800/30 absolute top-3 md:top-4 right-4 md:right-6 font-header group-hover:text-orange-500/10 transition-colors">
+                <div key={i} className="bg-slate-900 border border-slate-800 p-8 rounded-[32px] space-y-4 relative group hover:border-orange-500/50 transition-all hover:bg-slate-800/80">
+                   <span className="text-6xl font-black text-slate-800/30 absolute top-4 right-6 font-header group-hover:text-orange-500/10 transition-colors">
                     {item.step}
                    </span>
-                   <h4 className="text-xl md:text-2xl font-bold relative z-10">{item.title}</h4>
-                   <p className="text-slate-400 text-xs md:text-sm leading-relaxed relative z-10">{item.desc}</p>
-                   <div className="w-8 h-8 md:w-10 md:h-10 bg-orange-500 rounded-full flex items-center justify-center text-white shadow-lg shadow-orange-500/30">
-                      <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+                   <h4 className="text-2xl font-bold relative z-10">{item.title}</h4>
+                   <p className="text-slate-400 text-sm leading-relaxed relative z-10">{item.desc}</p>
+                   <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white shadow-lg shadow-orange-500/30">
+                      <ChevronRight className="w-5 h-5" />
                    </div>
                 </div>
               ))}
